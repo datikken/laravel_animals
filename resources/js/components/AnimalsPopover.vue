@@ -14,30 +14,47 @@
     <ul class="popover_list">
       <li
           class="popover_btn"
-          :class="`popover_btn--${item}`"
-          v-for="item in available"
+          :class="`popover_btn--${item.kind}`"
+          v-for="item in categories"
           @click="createAnimal(item)"
       >
-        <img class="popover_btn_icon" :src="`/images/icons/${item}.svg`" alt="">
+        <img class="popover_btn_icon" :src="`/images/icons/animals/${item.kind}.svg`" alt="">
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: "AnimalsPopover",
   data: () => ({
     state: false,
-    available: ['python', 'dog', 'elephant', 'cat']
+    categories: []
   }),
   methods: {
+    ...mapActions([
+        'CREATE_ANIMAL'
+    ]),
     togglePopover() {
       this.state = !this.state;
+      console.log(this.categories);
     },
-    createAnimal(type) {
-
+    createAnimal(animal) {
+      this.CREATE_ANIMAL(animal);
+    },
+    async fetchCategories() {
+      try {
+        const { data } = await axios.get('/animal_kinds');
+        this.categories = data;
+      } catch(err) {
+        console.warn(err)
+      }
     }
+  },
+  async mounted() {
+    this.fetchCategories();
   }
 }
 </script>
@@ -54,7 +71,7 @@ $gray: #D7CCC8;
   left: 50px;
   width: 48px;
   height: 48px;
-  max-width: 256px;
+  max-width: 249px;
   transition: all .1s ease-in-out;
   overflow: hidden;
 
@@ -67,6 +84,7 @@ $gray: #D7CCC8;
 .popover_icon {
   position: absolute;
   height: 48px;
+  cursor: pointer;
 }
 .popover_list {
   list-style: none;
@@ -80,6 +98,7 @@ $gray: #D7CCC8;
 .popover_btn {
   display: inline-flex;
   margin-right: 6px;
+  cursor: pointer;
 
   &:first-child {
     margin-left: 58px;

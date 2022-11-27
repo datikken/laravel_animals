@@ -1,6 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/images/icons/animals/cat.svg": "/images/icons/animals/cat.svg",
+    "/images/icons/animals/dog.svg": "/images/icons/animals/dog.svg",
+    "/images/icons/animals/elephant.svg": "/images/icons/animals/elephant.svg",
+    "/images/icons/animals/python.svg": "/images/icons/animals/python.svg",
     "/images/icons/cat.svg": "/images/icons/cat.svg",
     "/images/icons/dog.svg": "/images/icons/dog.svg",
     "/images/icons/elephant.svg": "/images/icons/elephant.svg",

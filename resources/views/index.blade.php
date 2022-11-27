@@ -42,7 +42,7 @@
             @endif
 
         <div id="app">
-            <app-component></app-component>
+            <app></app>
         </div>
         <script src="{{ mix('/js/app.js') }}"></script>
     </body>
