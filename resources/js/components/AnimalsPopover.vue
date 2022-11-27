@@ -35,14 +35,13 @@ export default {
   }),
   methods: {
     ...mapActions([
-        'CREATE_ANIMAL'
+        'SET_CATEGORY'
     ]),
     togglePopover() {
       this.state = !this.state;
-      console.log(this.categories);
     },
     createAnimal(animal) {
-      this.CREATE_ANIMAL(animal);
+      this.SET_CATEGORY(animal);
     },
     async fetchCategories() {
       try {

@@ -5320,14 +5320,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
-  watch: {
-    category: function category(newVal, oldVal) {
-      console.log(newVal, 'newVal');
-    }
-  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)({
     category: 'category'
   }))
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "AnimalAviary",
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)(['animals']))
 });
 
 /***/ }),
@@ -5352,7 +5370,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "AnimalForm",
   data: function data() {
     return {
-      name: ''
+      name: '',
+      error: false
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)({
@@ -5364,9 +5383,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.category.kind;
     }
   }),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['CLOSE_FORM'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['RESET', 'ADD_ANIMAL'])), {}, {
     closeForm: function closeForm() {
-      this.CLOSE_FORM(false);
+      this.RESET();
     },
     submitForm: function submitForm(e) {
       var _this = this;
@@ -5374,9 +5393,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/animals', {
         name: this.name,
         kind: this.kind
-      }).then(function () {
-        return _this.CLOSE_FORM(false);
-      }).then(function () {})["catch"](function (error) {
+      }).then(function (_ref) {
+        var data = _ref.data;
+        if (data.error) {
+          _this.error = data.data;
+          return;
+        }
+        _this.ADD_ANIMAL(_this.name);
+        _this.RESET();
+      })["catch"](function (error) {
         console.log(error);
       });
     }
@@ -5416,13 +5441,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       categories: []
     };
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['CREATE_ANIMAL'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['SET_CATEGORY'])), {}, {
     togglePopover: function togglePopover() {
       this.state = !this.state;
-      console.log(this.categories);
     },
     createAnimal: function createAnimal(animal) {
-      this.CREATE_ANIMAL(animal);
+      this.SET_CATEGORY(animal);
     },
     fetchCategories: function fetchCategories() {
       var _this = this;
@@ -5491,7 +5515,32 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container"
-  }, [_c("animals-popover"), _vm._v(" "), _vm.category ? _c("animal-form") : _vm._e()], 1);
+  }, [_c("animals-popover"), _vm._v(" "), _vm.category ? _c("animal-form") : _vm._e(), _vm._v(" "), _c("animal-aviary")], 1);
+};
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=template&id=3a07081b&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=template&id=3a07081b& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "aviary"
+  }, [_vm._v("\n  " + _vm._s(_vm.animals) + "\n")]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5518,9 +5567,11 @@ var render = function render() {
     staticClass: "animal_form"
   }, [_c("div", {
     staticClass: "animal_form_text"
-  }, [_c("p", {
+  }, [!_vm.error ? _c("p", {
     staticClass: "animal_form_suggest"
-  }, [_vm._v("Type your pet's name:")]), _vm._v(" "), _c("span", {
+  }, [_vm._v("Type your pet's name:")]) : _c("p", {
+    staticClass: "animal_form_err"
+  }, [_vm._v(_vm._s(_vm.error))]), _vm._v(" "), _c("span", {
     staticClass: "animal_form_close",
     on: {
       click: _vm.closeForm
@@ -5720,24 +5771,32 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: function state() {
     return {
-      category: null
+      category: null,
+      animals: []
     };
   },
   actions: {
-    CLOSE_FORM: function CLOSE_FORM(_ref) {
+    RESET: function RESET(_ref) {
       var commit = _ref.commit;
-      commit('closeForm');
+      commit('reset');
     },
-    CREATE_ANIMAL: function CREATE_ANIMAL(_ref2, data) {
+    SET_CATEGORY: function SET_CATEGORY(_ref2, data) {
       var commit = _ref2.commit;
-      commit('createAnimal', data);
+      commit('setCategory', data);
+    },
+    ADD_ANIMAL: function ADD_ANIMAL(_ref3, data) {
+      var commit = _ref3.commit;
+      commit('addAnimal', data);
     }
   },
   mutations: {
-    closeForm: function closeForm(state) {
+    reset: function reset(state) {
       state.category = null;
     },
-    createAnimal: function createAnimal(state, payload) {
+    addAnimal: function addAnimal(state, payload) {
+      state.animals.push(payload);
+    },
+    setCategory: function setCategory(state, payload) {
       if (!payload) state.category = null;
       state.category = _objectSpread({}, payload);
     }
@@ -11005,6 +11064,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".popover {\n  display: flex;\n  align-
 
 /***/ }),
 
+/***/ "./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js */ "./node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.aviary {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalForm.vue?vue&type=style&index=0&id=66fded8b&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalForm.vue?vue&type=style&index=0&id=66fded8b&lang=css& ***!
@@ -11022,7 +11105,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.animal_form {\n  display: flex;\n  flex-direction: column;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.animal_form_suggest {\n  margin: 0;\n}\n.animal_form_text {\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n.animal_form_close {\n  width: 24px;\n  height: 24px;\n  margin-bottom: 10px;\n  transform: rotate(45deg);\n  background-image: url('/images/icons/plus_black.svg');\n  background-size: cover;\n  background-repeat: no-repeat;\n  align-self: flex-end;\n  cursor: pointer;\n}\n.animal_form_name {\n  font-size: 36px;\n  width: 550px;\n  height: 50px;\n  background-color: transparent;\n  border: 2px solid black;\n  border-radius: 5px;\n  margin-bottom: 10px;\n}\n.animal_form_button {\n  height: 40px;\n  width: 100px;\n  border-radius: 10px;\n  border: 2px solid;\n  font-weight: 600;\n  cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.animal_form {\n  display: flex;\n  flex-direction: column;\n  position: absolute;\n  top: 25%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.animal_form_suggest, .animal_form_err {\n  margin: 0;\n}\n.animal_form_err {\n  color: red;\n}\n.animal_form_text {\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n.animal_form_close {\n  width: 24px;\n  height: 24px;\n  margin-bottom: 10px;\n  transform: rotate(45deg);\n  background-image: url('/images/icons/plus_black.svg');\n  background-size: cover;\n  background-repeat: no-repeat;\n  align-self: flex-end;\n  cursor: pointer;\n}\n.animal_form_name {\n  font-size: 36px;\n  width: 550px;\n  height: 50px;\n  background-color: transparent;\n  border: 2px solid black;\n  border-radius: 5px;\n  margin-bottom: 10px;\n}\n.animal_form_button {\n  height: 40px;\n  width: 100px;\n  border-radius: 10px;\n  border: 2px solid;\n  font-weight: 600;\n  cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11339,6 +11422,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalsPopover_vue_vue_type_style_index_0_id_2c0c54d9_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalAviary_vue_vue_type_style_index_0_id_3a07081b_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css& */ "./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalAviary_vue_vue_type_style_index_0_id_3a07081b_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalAviary_vue_vue_type_style_index_0_id_3a07081b_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -11690,6 +11803,47 @@ component.options.__file = "resources/js/App.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/AnimalAviary.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/AnimalAviary.vue ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AnimalAviary_vue_vue_type_template_id_3a07081b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimalAviary.vue?vue&type=template&id=3a07081b& */ "./resources/js/components/AnimalAviary.vue?vue&type=template&id=3a07081b&");
+/* harmony import */ var _AnimalAviary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimalAviary.vue?vue&type=script&lang=js& */ "./resources/js/components/AnimalAviary.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AnimalAviary_vue_vue_type_style_index_0_id_3a07081b_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css& */ "./resources/js/components/AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _AnimalAviary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnimalAviary_vue_vue_type_template_id_3a07081b___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AnimalAviary_vue_vue_type_template_id_3a07081b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AnimalAviary.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/AnimalForm.vue":
 /*!************************************************!*\
   !*** ./resources/js/components/AnimalForm.vue ***!
@@ -11788,6 +11942,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AnimalAviary.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/AnimalAviary.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalAviary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalAviary.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalAviary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/AnimalForm.vue?vue&type=script&lang=js&":
 /*!*************************************************************************!*\
   !*** ./resources/js/components/AnimalForm.vue?vue&type=script&lang=js& ***!
@@ -11837,6 +12007,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AnimalAviary.vue?vue&type=template&id=3a07081b&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/AnimalAviary.vue?vue&type=template&id=3a07081b& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalAviary_vue_vue_type_template_id_3a07081b___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalAviary_vue_vue_type_template_id_3a07081b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalAviary_vue_vue_type_template_id_3a07081b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalAviary.vue?vue&type=template&id=3a07081b& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=template&id=3a07081b&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/AnimalForm.vue?vue&type=template&id=66fded8b&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/AnimalForm.vue?vue&type=template&id=66fded8b& ***!
@@ -11880,6 +12067,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalsPopover_vue_vue_type_style_index_0_id_2c0c54d9_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalsPopover.vue?vue&type=style&index=0&id=2c0c54d9&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalsPopover.vue?vue&type=style&index=0&id=2c0c54d9&lang=scss&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalAviary_vue_vue_type_style_index_0_id_3a07081b_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AnimalAviary.vue?vue&type=style&index=0&id=3a07081b&lang=css&");
 
 
 /***/ }),
@@ -25222,6 +25422,7 @@ var index = {
 
 var map = {
 	"./App.vue": "./resources/js/App.vue",
+	"./components/AnimalAviary.vue": "./resources/js/components/AnimalAviary.vue",
 	"./components/AnimalForm.vue": "./resources/js/components/AnimalForm.vue",
 	"./components/AnimalsPopover.vue": "./resources/js/components/AnimalsPopover.vue"
 };

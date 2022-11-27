@@ -1,7 +1,8 @@
 <template>
   <form class="animal_form">
     <div class="animal_form_text">
-      <p class="animal_form_suggest">Type your pet's name:</p>
+      <p v-if="!error" class="animal_form_suggest">Type your pet's name:</p>
+      <p v-else class="animal_form_err">{{ error }}</p>
       <span class="animal_form_close" @click="closeForm"></span>
     </div>
     <input type="text" class="animal_form_name" ref="input" v-model="name"/>
@@ -10,13 +11,13 @@
 </template>
 
 <script>
-
 import {mapState, mapActions} from "vuex";
 
 export default {
   name: "AnimalForm",
   data: () => ({
-    name: ''
+    name: '',
+    error: false
   }),
   computed: {
     ...mapState({
@@ -27,9 +28,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['CLOSE_FORM']),
+    ...mapActions(['RESET', 'ADD_ANIMAL']),
     closeForm() {
-      this.CLOSE_FORM(false)
+      this.RESET()
     },
     submitForm(e) {
       e.preventDefault();
@@ -37,8 +38,14 @@ export default {
         name: this.name,
         kind: this.kind
       })
-          .then(() => this.CLOSE_FORM(false))
-          .then(() => {})
+          .then(({ data }) => {
+            if(data.error) {
+              this.error = data.data;
+              return;
+            }
+            this.ADD_ANIMAL(this.name);
+            this.RESET();
+          })
           .catch(function (error) {
             console.log(error);
           });
@@ -55,13 +62,17 @@ export default {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.animal_form_suggest {
+.animal_form_suggest, .animal_form_err {
   margin: 0;
+}
+
+.animal_form_err {
+  color: red;
 }
 
 .animal_form_text {

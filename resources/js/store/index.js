@@ -6,22 +6,29 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state () {
     return {
-      category: null
+      category: null,
+      animals: []
     }
   },
   actions: {
-    CLOSE_FORM({ commit }) {
-      commit('closeForm');
+    RESET({ commit }) {
+      commit('reset');
     },
-    CREATE_ANIMAL({ commit }, data) {
-      commit('createAnimal', data);
+    SET_CATEGORY({ commit }, data) {
+      commit('setCategory', data);
+    },
+    ADD_ANIMAL({ commit }, data) {
+      commit('addAnimal', data);
     }
   },
   mutations: {
-    closeForm(state) {
+    reset(state) {
       state.category = null;
     },
-    createAnimal(state, payload) {
+    addAnimal(state, payload) {
+      state.animals.push(payload);
+    },
+    setCategory(state, payload) {
       if(!payload) state.category = null;
       state.category = {
         ...payload
