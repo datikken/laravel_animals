@@ -1,36 +1,31 @@
 <template>
 <div class="aviary">
-  <div class="aviary_item" v-if="summonedCategories.length > 0" v-for="animal in summonedCategories">
+  <div class="aviary_item" v-if="summoned.length > 0" v-for="animal in summoned">
     <Animal :animal="animal" />
   </div>
 </div>
 </template>
 
 <script>
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "AnimalAviary",
   data: () => ({
-    summonedCategories: []
+    summoned: []
   }),
   computed: {
     ...mapState(['animals'])
   },
   watch: {
     animals(newVal) {
-      if(this.summonedCategories.length === 0) {
-        newVal.map(el => this.fetchCategoryByCategory(el));
+      if(this.summoned.length === 0) {
+        this.summoned = [...newVal];
       } else {
-        const diff = _.differenceWith(newVal, this.summonedCategories.map(el => el.kind));
-        this.fetchCategoryByCategory(diff);
+        const diff = _.differenceWith(newVal.map(el => el.kind), this.summoned.map(el => el.kind));
+        const newbie = newVal.find(el => el.kind === diff[0]);
+        this.summoned.push(newbie);
       }
-    }
-  },
-  methods: {
-    async fetchCategoryByCategory(cat) {
-      const { data } = await axios.get(`/animals/${cat}`);
-      this.summonedCategories.push(data[0]);
     }
   }
 }
@@ -44,6 +39,7 @@ export default {
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
 }
 </style>

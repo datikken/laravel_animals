@@ -17,7 +17,7 @@ export default {
   name: "AnimalForm",
   data: () => ({
     name: '',
-    error: false
+    error: false,
   }),
   computed: {
     ...mapState({
@@ -43,7 +43,7 @@ export default {
               this.error = data.data;
               return;
             }
-            this.ADD_ANIMAL(this.kind);
+            this.ADD_ANIMAL({ kind: this.kind, name: this.name });
             this.RESET();
           })
           .catch(function (error) {

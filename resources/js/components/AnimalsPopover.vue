@@ -14,7 +14,7 @@
     <ul class="popover_list">
       <li
           class="popover_btn"
-          :class="`popover_btn--${item.kind}`"
+          :class="`popover_btn--${item.kind} ${summoned.includes(item.kind) ? 'popover_btn--disabled' : ''}`"
           v-for="item in categories"
           @click="createAnimal(item)"
       >
@@ -31,7 +31,8 @@ export default {
   name: "AnimalsPopover",
   data: () => ({
     state: false,
-    categories: []
+    categories: [],
+    summoned: []
   }),
   methods: {
     ...mapActions([
@@ -41,6 +42,10 @@ export default {
       this.state = !this.state;
     },
     createAnimal(animal) {
+      if(this.summoned.includes(animal.kind)) {
+        return;
+      }
+      this.summoned.push(animal.kind);
       this.SET_CATEGORY(animal);
     },
     async fetchCategories() {
@@ -105,6 +110,10 @@ $gray: #D7CCC8;
 
   &:last-child {
     margin-right: 12px;
+  }
+
+  &--disabled {
+    opacity: 50%;
   }
 }
 

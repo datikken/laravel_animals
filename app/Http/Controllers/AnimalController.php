@@ -34,13 +34,23 @@ class AnimalController extends Controller
             ]);
         }
 
-        $animal->update([
-            'age' => ++$animal->age
-        ]);
+        if($animal->age < $animal->category->max_age)
+        {
+            $animal->update([
+                'age' => ++$animal->age,
+            ]);
+
+            if($animal->size < $animal->category->max_size)
+            {
+                $animal->update([
+                    'size' => $animal->size * $animal->category->growth_factor
+                ]);
+            }
+        }
 
         return response()->json([
             'error' => false,
-            'data' => 'ok'
+            'data' => $animal
         ]);
     }
 
