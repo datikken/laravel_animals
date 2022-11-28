@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <animals-popover />
-    <animal-form v-if="category" />
-    <animal-aviary />
+    <animals-popover/>
+    <animal-form v-if="category"/>
+    <animal-aviary/>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 import {ENV} from "./app";
 
 export default {
@@ -18,7 +18,7 @@ export default {
     })
   },
   mounted() {
-    if(ENV === 'development') {
+    if (ENV === 'development') {
       window.addEventListener('beforeunload', async () => {
         await axios.post('/kill_em_all');
       });

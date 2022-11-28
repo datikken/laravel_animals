@@ -1,13 +1,13 @@
 <template>
-<div class="aviary">
-  <div class="aviary_item" v-if="summoned.length > 0" v-for="animal in summoned">
-    <Animal :animal="animal" />
+  <div class="aviary">
+    <div class="aviary_item" v-if="summoned.length > 0" v-for="animal in summoned">
+      <Animal :animal="animal"/>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 
 export default {
   name: "AnimalAviary",
@@ -19,7 +19,7 @@ export default {
   },
   watch: {
     animals(newVal) {
-      if(this.summoned.length === 0) {
+      if (this.summoned.length === 0) {
         this.summoned = [...newVal];
       } else {
         const diff = _.differenceWith(newVal.map(el => el.kind), this.summoned.map(el => el.kind));

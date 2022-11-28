@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
 export default {
   name: "AnimalsPopover",
@@ -34,15 +34,20 @@ export default {
     categories: [],
     summoned: []
   }),
+  computed: {
+    ...mapState({
+      category: state => state.category
+    }),
+  },
   methods: {
     ...mapActions([
-        'SET_CATEGORY'
+      'SET_CATEGORY'
     ]),
     togglePopover() {
       this.state = !this.state;
     },
     createAnimal(animal) {
-      if(this.summoned.includes(animal.kind)) {
+      if (this.summoned.includes(animal.kind) || this.category) {
         return;
       }
       this.summoned.push(animal.kind);
@@ -50,10 +55,10 @@ export default {
     },
     async fetchCategories() {
       try {
-        const { data } = await axios.get('/animal_kinds');
+        const {data} = await axios.get('/animal_kinds');
         this.categories = data;
-      } catch(err) {
-        console.warn(err)
+      } catch (err) {
+        console.warn(err);
       }
     }
   },
@@ -90,6 +95,7 @@ $gray: #D7CCC8;
   height: 48px;
   cursor: pointer;
 }
+
 .popover_list {
   list-style: none;
   align-items: center;

@@ -30,7 +30,7 @@ export default {
   methods: {
     ...mapActions(['RESET', 'ADD_ANIMAL']),
     closeForm() {
-      this.RESET()
+      this.RESET();
     },
     submitForm(e) {
       e.preventDefault();
@@ -38,12 +38,12 @@ export default {
         name: this.name,
         kind: this.kind
       })
-          .then(({ data }) => {
-            if(data.error) {
+          .then(({data}) => {
+            if (data.error) {
               this.error = data.data;
               return;
             }
-            this.ADD_ANIMAL({ kind: this.kind, name: this.name });
+            this.ADD_ANIMAL({kind: this.kind, name: this.name});
             this.RESET();
           })
           .catch(function (error) {
@@ -102,6 +102,7 @@ export default {
   border-radius: 5px;
   margin-bottom: 10px;
 }
+
 .animal_form_button {
   height: 40px;
   width: 100px;

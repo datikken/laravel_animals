@@ -1,18 +1,18 @@
 <template>
-<div
-    v-if="pet"
-    class="animal"
-    @click="growOld()"
->
-  <img
-      :class="{ shake: please }"
-      :style="{
+  <div
+      v-if="pet"
+      class="animal"
+      @click="growOld()"
+  >
+    <img
+        :class="{ shake: please }"
+        :style="{
         width: `${pet.size}px`
       }"
-      :src="`/images/pets/${animal.kind}.svg`"
-      :alt="animal.kind"
-  >
-</div>
+        :src="`/images/pets/${animal.kind}.svg`"
+        :alt="animal.kind"
+    >
+  </div>
 </template>
 
 <script>
@@ -33,27 +33,26 @@ export default {
   mounted() {
     this.startToGrow();
   },
+  computed: {
+    isDead() {
+      return this.pet && this.pet.age === parseInt(this.pet.category.max_age);
+    }
+  },
   methods: {
     async growOld() {
       const name = this.$props.animal.name;
-      const { data: { data } } = await axios.post('animals/age', {
+      const {data: {data}} = await axios.post('animals/age', {
         name
       });
       return data;
     },
     async startToGrow() {
       clearInterval(this.ivl);
-      let stopFlag = false;
       this.ivl = setInterval(async () => {
-        if(this.pet && this.pet.age === parseInt(this.pet.category.max_age)) {
-          stopFlag = true;
-        }
-
-        if(stopFlag) {
+        if (this.isDead) {
           clearInterval(this.ivl);
           this.please = true;
         }
-
         this.pet = await this.growOld();
       }, this.speed);
     }

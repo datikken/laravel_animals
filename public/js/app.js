@@ -5385,6 +5385,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     this.startToGrow();
   },
+  computed: {
+    isDead: function isDead() {
+      return this.pet && this.pet.age === parseInt(this.pet.category.max_age);
+    }
+  },
   methods: {
     growOld: function growOld() {
       var _this = this;
@@ -5414,37 +5419,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     startToGrow: function startToGrow() {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var stopFlag;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 clearInterval(_this2.ivl);
-                stopFlag = false;
                 _this2.ivl = setInterval( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
                   return _regeneratorRuntime().wrap(function _callee2$(_context2) {
                     while (1) {
                       switch (_context2.prev = _context2.next) {
                         case 0:
-                          if (_this2.pet && _this2.pet.age === parseInt(_this2.pet.category.max_age)) {
-                            stopFlag = true;
-                          }
-                          if (stopFlag) {
+                          if (_this2.isDead) {
                             clearInterval(_this2.ivl);
                             _this2.please = true;
                           }
-                          _context2.next = 4;
+                          _context2.next = 3;
                           return _this2.growOld();
-                        case 4:
+                        case 3:
                           _this2.pet = _context2.sent;
-                        case 5:
+                        case 4:
                         case "end":
                           return _context2.stop();
                       }
                     }
                   }, _callee2);
                 })), _this2.speed);
-              case 3:
+              case 2:
               case "end":
                 return _context3.stop();
             }
@@ -5603,12 +5603,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       summoned: []
     };
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)({
+    category: function category(state) {
+      return state.category;
+    }
+  })),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(['SET_CATEGORY'])), {}, {
     togglePopover: function togglePopover() {
       this.state = !this.state;
     },
     createAnimal: function createAnimal(animal) {
-      if (this.summoned.includes(animal.kind)) {
+      if (this.summoned.includes(animal.kind) || this.category) {
         return;
       }
       this.summoned.push(animal.kind);
