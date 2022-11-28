@@ -43,7 +43,7 @@ export default {
               this.error = data.data;
               return;
             }
-            this.ADD_ANIMAL(this.name);
+            this.ADD_ANIMAL(this.kind);
             this.RESET();
           })
           .catch(function (error) {

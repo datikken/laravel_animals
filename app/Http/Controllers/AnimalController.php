@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class AnimalController extends Controller
 {
+    public function killEmAll()
+    {
+        Animal::truncate();
+
+        return response()->json([
+            'error' => false,
+            'data' => 'ok'
+        ]);
+    }
+
     public function age(Request $request)
     {
         $validated = $request->validate([

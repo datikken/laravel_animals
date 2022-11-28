@@ -9,5 +9,9 @@
     "/images/icons/dog.svg": "/images/icons/dog.svg",
     "/images/icons/elephant.svg": "/images/icons/elephant.svg",
     "/images/icons/plus_black.svg": "/images/icons/plus_black.svg",
-    "/images/icons/python.svg": "/images/icons/python.svg"
+    "/images/icons/python.svg": "/images/icons/python.svg",
+    "/images/pets/cat.svg": "/images/pets/cat.svg",
+    "/images/pets/dog.svg": "/images/pets/dog.svg",
+    "/images/pets/elephant.svg": "/images/pets/elephant.svg",
+    "/images/pets/python.svg": "/images/pets/python.svg"
 }
