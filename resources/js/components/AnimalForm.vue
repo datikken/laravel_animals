@@ -65,6 +65,8 @@ export default {
   top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: calc(100% - 40px);
+  max-width: 300px;
 }
 
 .animal_form_suggest, .animal_form_err {
@@ -95,7 +97,6 @@ export default {
 
 .animal_form_name {
   font-size: 36px;
-  width: 550px;
   height: 50px;
   background-color: transparent;
   border: 2px solid black;
